@@ -38,16 +38,16 @@ public class SecurityConfig {
                 //Isso é necessário porque precisamos dessas rotas para conseguir pegar o token.
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                         //Libera erros internos do Spring
-                            //Isso evita que páginas de erro 403/404 criem loops de autenticação.
+                        //Isso evita que páginas de erro 403/404 criem loops de autenticação.
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                            //User pode acessar POST /auth/login (fazer login)
+                        //User pode acessar POST /auth/login (fazer login)
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                            //User pode acessar POST /auth/register (criar conta)
+                        //User pode acessar POST /auth/register (criar conta)
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                            //Exige autenticação em qualquer outra rota
+                        //Exige autenticação em qualquer outra rota
                         .anyRequest().authenticated())
                 //Adiciona o meu filtro JWT
-                    //Isso coloca o meu SecurityFilter (o filtro que valida tokens) ANTES do filtro padrão de login do Spring
+                //Isso coloca o meu SecurityFilter (o filtro que valida tokens) ANTES do filtro padrão de login do Spring
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

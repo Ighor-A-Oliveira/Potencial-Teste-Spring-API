@@ -37,7 +37,7 @@ public class TokenConfig {
 
         try {
             //Recria o algoritmo usado na assinatura do token
-                //Se o token tiver sido alterado, a validação vai falhar.
+            //Se o token tiver sido alterado, a validação vai falhar.
             Algorithm algorithm = Algorithm.HMAC256(secret);
             //Valida e decodifica o token
             DecodedJWT decode = JWT.require(algorithm)

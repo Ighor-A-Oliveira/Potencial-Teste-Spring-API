@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "users")
 @Entity(name = "users")
 public class User implements UserDetails {
-        //The user controller must have user details so it can have a proper role and well defined limits
+    //The user controller must have user details so it can have a proper role and well defined limits
 
 
     @Id

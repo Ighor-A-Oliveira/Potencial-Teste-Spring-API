@@ -41,13 +41,13 @@ public class AuthController {
     //Recebe e valida o JSON do login
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest){
         //Cria o token de autenticação interno do Spring
-            //Spring Security só aceita login no formato UsernamePasswordAuthenticationToken
+        //Spring Security só aceita login no formato UsernamePasswordAuthenticationToken
         UsernamePasswordAuthenticationToken userAndPass = new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password());
         //Autentica no Spring Security:
-                //Busca o usuário no banco (UserDetailsService)
-                //Compara a senha com BCrypt (PasswordEncoder)
-                //se estiver certo: retorna um objeto Authentication
-                //se estiver errado: lança BadCredentialsException
+        //Busca o usuário no banco (UserDetailsService)
+        //Compara a senha com BCrypt (PasswordEncoder)
+        //se estiver certo: retorna um objeto Authentication
+        //se estiver errado: lança BadCredentialsException
         Authentication authentication = authenticationManager.authenticate(userAndPass);
 
         //Recupera o usuário autenticado do banco de dados
@@ -55,7 +55,7 @@ public class AuthController {
         //Gera o JWT para o usuário logado
         String token = tokenConfig.generateToken(user);
         //Retorna o token no body
-            //retorna uma resposta HTTP 200 (OK) contendo um objeto JSON com o token dentro
+        //retorna uma resposta HTTP 200 (OK) contendo um objeto JSON com o token dentro
         return ResponseEntity.ok(new LoginResponse(token));
     }
 
@@ -66,7 +66,7 @@ public class AuthController {
         //Cria um novo usuário
         User newUser = new User();
         //Copia os dados da requisição para o usuário
-            //passwordEncoder.encode() esta criptografando a senha
+        //passwordEncoder.encode() esta criptografando a senha
         newUser.setPassword(passwordEncoder.encode(userRequest.password()));
         newUser.setEmail(userRequest.email());
         newUser.setName(userRequest.name());
@@ -76,7 +76,7 @@ public class AuthController {
 
 
         //Retorna uma resposta HTTP 201 (Created)
-            //Responde 201 CREATED, dizendo que o usuário foi criado.
+        //Responde 201 CREATED, dizendo que o usuário foi criado.
         return ResponseEntity.status(HttpStatus.CREATED).body(new RegisterUserResponse(newUser.getName(), newUser.getEmail()));
     }
 }

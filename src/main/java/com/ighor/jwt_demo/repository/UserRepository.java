@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     //here we are returning a UserDetails because this class is implemented by the User Class
-        // and it has all the auth details of our user
+    // and it has all the auth details of our user
     Optional<UserDetails> findUserByEmail(String userName);
 
 }
